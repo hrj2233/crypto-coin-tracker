@@ -3,7 +3,6 @@ import Router from './routes/Router';
 // 캐시에 있는 query를 볼 수 있음.
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { darkTheme, lightTheme } from './theme';
-import { useState } from 'react';
 import { isDarkAtom } from './atoms';
 import { useRecoilValue } from 'recoil';
 

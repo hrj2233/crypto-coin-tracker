@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import {
@@ -151,13 +150,11 @@ interface PriceData {
   };
 }
 
-interface ICoinProps {}
-
-function Coin({}: ICoinProps) {
+function Coin() {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
-  const priceMatch = useRouteMatch('/:coinId/price');
-  const chartMatch = useRouteMatch('/:coinId/chart');
+  const priceMatch = useRouteMatch('/crypto-coin-tracker/:coinId/price');
+  const chartMatch = useRouteMatch('/crypto-coin-tracker/:coinId/chart');
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ['info', coinId],
     () => fetchCoinInfo(coinId),
@@ -180,7 +177,7 @@ function Coin({}: ICoinProps) {
         </title>
       </Helmet>
       <Header>
-        <Link to="/">⬅</Link>
+        <Link to="/crypto-coin-tracker/">⬅</Link>
         <Title>
           {state?.name ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
@@ -217,18 +214,18 @@ function Coin({}: ICoinProps) {
 
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={`/crypto-coin-tracker/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/crypto-coin-tracker/${coinId}/price`}>Price</Link>
             </Tab>
           </Tabs>
 
           <Switch>
-            <Route path={`/:coinId/price`}>
+            <Route path={`/crypto-coin-tracker/:coinId/price`}>
               <Price coinId={coinId} />
             </Route>
-            <Route path={`/:coinId/chart`}>
+            <Route path={`/crypto-coin-tracker/:coinId/chart`}>
               <Chart coinId={coinId} />
             </Route>
           </Switch>

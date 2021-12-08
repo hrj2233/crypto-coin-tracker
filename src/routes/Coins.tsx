@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -65,8 +64,6 @@ interface ICoin {
   type: string;
 }
 
-interface ICoinsProps {}
-
 function Coins() {
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
@@ -93,7 +90,7 @@ function Coins() {
             <Coin key={coin.id}>
               <Link
                 to={{
-                  pathname: `/${coin.id}`,
+                  pathname: `/crypto-coin-tracker/${coin.id}`,
                   state: { name: coin.name },
                 }}
               >
